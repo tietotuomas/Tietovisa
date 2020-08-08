@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tietovisa - Etusivu</title>
+</head>
+<body>
+    <i>Sovelluksen ulkoasuun tulossa parannus pian.</i>
+    <br>
+    <br>
+     
+    {% if session.user_id %}
+    <p>Olet kirjautunut sisään, {{session.username}}.<br>
+    Olit kaikkien aikojen <b>{{session.ordinal}}</b> sovellukseen rekisteröitynyt käyttäjä!</p>
+
+    Sovelluksessa on tällä hetkellä valittavissa {{ count }} visaa:
+    <hr>
+    {% for quiz in quizzes %}
+    Aihe: {{ quiz[0] }} 
+    <br>
+    <a href="/quiz/{{ quiz[1] }}">Mene kyselyyn</a>
+    <hr>
+    {% endfor %}
+    
+    <a href="/logout">Kirjaudu ulos</a>
+    {% else %}
+    <a href="/login">Kirjaudu sisään</a>
+    {% endif %}
+</body>
+</html>
