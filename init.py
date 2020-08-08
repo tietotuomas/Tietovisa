@@ -19,7 +19,7 @@ def init():
 
 
 def create():
-    create = ["INSERT INTO quizzes (topic) VALUES ('Matematiikkaa englanniksi')",
+    create_questions = ["INSERT INTO quizzes (topic) VALUES ('Matematiikkaa englanniksi')",
     "INSERT INTO quizzes (topic) VALUES ('Googlatuin tv-sarja')",
     "INSERT INTO questions (content, quiz_id) VALUES ('Mitä on vähentää englanniksi?', 1)",
     "INSERT INTO questions (content, quiz_id) VALUES ('Mitä on yhteenlasku englanniksi?', 1)",
@@ -28,8 +28,8 @@ def create():
     "INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli maailmanlaajuisesti googlatuin tv-sarja vuonna 2019?', 2)",
     "INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli maailmanlaajuisesti googlatuin tv-sarja vuonna 2012?', 2)",
     "INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli googlatuin tv-sarja Suomessa vuonna 2018?', 2)",
-    "INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli googlatuin tv-sarja USA:ssa vuonna 2015?', 2)",
-    "INSERT INTO answers (content, question_id, correct) VALUES ('subtract', 1, TRUE)",
+    "INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli googlatuin tv-sarja USA:ssa vuonna 2015?', 2)"]
+    create_answers = ["INSERT INTO answers (content, question_id, correct) VALUES ('subtract', 1, TRUE)",
     "INSERT INTO answers (content, question_id, correct) VALUES ('distract', 1, FALSE)",
     "INSERT INTO answers (content, question_id, correct) VALUES ('submit', 1, FALSE)",
     "INSERT INTO answers (content, question_id, correct) VALUES ('fraction', 1, FALSE)",
@@ -61,7 +61,9 @@ def create():
     "INSERT INTO answers (content, question_id, correct) VALUES ('Breaking Bad', 8, FALSE)",
     "INSERT INTO answers (content, question_id, correct) VALUES ('Better Call Saul', 8, TRUE)",
     "INSERT INTO answers (content, question_id, correct) VALUES ('Prison Break', 8, FALSE)"]
-    for sql in create:
+    for sql in create_questions:
+        db.session.execute(sql)
+    for sql in create_answers:
         db.session.execute(sql)
     
     db.session.commit()
