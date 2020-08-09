@@ -66,11 +66,12 @@ def quiz(id):
 @app.route("/answer", methods=["POST"])
 def answer():
     quiz_id = request.form["id"]
+    # print(request.form)
     question_ids = request.form.getlist("question")
     answer_ids = []
     for q in question_ids:
-        print(q)
-        answer_ids.append(request.form[q])
+        if q in request.form:
+            answer_ids.append(request.form[q])
     user_id = users.user_id()
     for a in answer_ids:
         sql = "INSERT INTO user_answers (user_id, answer_id) VALUES (:user, :answer);"
