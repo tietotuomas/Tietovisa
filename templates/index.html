@@ -13,16 +13,20 @@
     {% if session.user_id %}
     <p>Olet kirjautunut sisään, {{session.username}}.<br>
     Olit kaikkien aikojen <b>{{session.ordinal}}</b> sovellukseen rekisteröitynyt käyttäjä!</p>
-
-    Sovelluksessa on tällä hetkellä valittavissa {{ count }} visaa:
+    Sovelluksessa on tällä hetkellä yhteensä {{ all }} visaa.
+    {% if available > 0 %}
+    Voit vastata vielä {{ available }} visaan:
     <hr>
-    {% for quiz in quizzes %}
+    {% for quiz in visible %}
     Aihe: {{ quiz[0] }} 
     <br>
     <a href="/quiz/{{ quiz[1] }}">Mene kyselyyn</a>
     <hr>
     {% endfor %}
-    
+    {% else %}
+    Olet jo vastannut niihin kaikkiin! Kiitos, uusia visoja tulossa myöhemmin.
+    <br>
+    {% endif %}
     <a href="/logout">Kirjaudu ulos</a>
     {% else %}
     <a href="/login">Kirjaudu sisään</a>

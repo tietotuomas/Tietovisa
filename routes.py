@@ -1,19 +1,27 @@
 from app import app
 from flask import render_template, request, redirect
 from db import db # kirjautumisen ja rekisteröinnin tietokantatoiminnot eriytetty
-# jo omaan moduuliin, tarkoitus eriyttää loputkin tietokantatoiminnot myöhemmin
+# jo kokonaan omaan moduuliin, tarkoitus eriyttää loputkin tietokantatoiminnot myöhemmin
 from flask import session
-import users, quizzes, init
+import users, quizzes
 
-init.init() #Väliaikainen kökkö tapa poistaa käynnistäessä vanha tietokanta 
+# init.init() #Väliaikainen kökkö tapa poistaa käynnistäessä vanha tietokanta 
 # ja luoda uusi (tyhjä). Tämä ei tietysti lopullisessa versiossa toivottava
 # ominaisuus, mutta helpottanut kehitystä/testausta alkuvaiheessa.
-init.create() #Tämä lisää tietokantaan pari tietovisaa.
+# init.create() #Tämä lisää tietokantaan pari tietovisaa.
 
 @app.route("/")
 def index():
-    list = quizzes.get_list()
-    return render_template("index.html", count=len(list), quizzes=list)
+    all = quizzes.get_all()
+    done = quizzes.get_done()
+    visible = []
+    for row in all:
+        if row in done:
+            continue
+        visible.append(row)
+
+    return render_template("index.html", all=len(all), available=len(visible),\
+        visible=visible)
 
 @app.route("/login", methods=["get","post"])
 def login():
