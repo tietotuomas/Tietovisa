@@ -5,11 +5,6 @@ from db import db # kirjautumisen ja rekisteröinnin tietokantatoiminnot eriytet
 from flask import session
 import users, quizzes
 
-# init.init() #Väliaikainen kökkö tapa poistaa käynnistäessä vanha tietokanta 
-# ja luoda uusi (tyhjä). Tämä ei tietysti lopullisessa versiossa toivottava
-# ominaisuus, mutta helpottanut kehitystä/testausta alkuvaiheessa.
-# init.create() #Tämä lisää tietokantaan pari tietovisaa.
-
 @app.route("/")
 def index():
     all = quizzes.get_all()
