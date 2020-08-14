@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="fi">
 <head>
+  <link rel='stylesheet' href="/static/style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tietovisa - Kysely</title>
 </head>
 <body>
-<h3>{{ topic }}</h3>
-Vastaathan kaikkiin kysymyksiin, voit tehdä kyselyn vain kerran.
-<hr>
+  <div class="header">
+  </div>
+  <div class="content">
+    <h3>{{ topic }}</h3>
+    <br>
+    Vastaathan kaikkiin kysymyksiin, voit tehdä kyselyn vain kerran.
+
 <form action="/answer" method="POST">
 
 {% for question in questions %}
@@ -17,20 +22,22 @@ Vastaathan kaikkiin kysymyksiin, voit tehdä kyselyn vain kerran.
 {{ question[1] }}
 <br>
 {% for answer in answers %}
-{% if answer[3] == question[0] %}
-<input type="radio" name="{{question[0]}}" value="{{ answer[0] }}"> {{ answer[1] }} <br>
+{% if answer[2] == question[0] %}
+<input type="radio" name="{{question[0]}}" value="{{ answer[0] }}"> {{ answer[1] }} 
+<br>
 
 {% endif %}
 {% endfor %}
 {% endfor %}
-<p>
+<br>
 <input type="submit" value="Lähetä">
 <input type="hidden" name="id" value="{{ id }}">
 
 </form>
-<hr>
 
-<a href="/">Takaisin etusivulle</a> 
+<br>
+  <a href="/">Takaisin etusivulle</a> 
   
+</div>
 </body>
 </html>

@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tietovisa - Etusivu</title>
+  <link rel='stylesheet' href="static/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tietovisa - Etusivu</title>
 </head>
 <body>
-    <i>Sovelluksen ulkoasuun tulossa parannus pian.</i>
-    <br>
-    <br>
-     
-    {% if session.user_id %}
-    <p>Olet kirjautunut sisään, {{session.username}}.<br>
-    Olit kaikkien aikojen <b>{{session.ordinal}}</b> sovellukseen rekisteröitynyt käyttäjä!</p>
-    Sovelluksessa on tällä hetkellä yhteensä {{ all }} visaa.
-    {% if available > 0 %}
-    Voit vastata vielä {{ available }} visaan:
-    <hr>
-    {% for quiz in visible %}
-    Aihe: {{ quiz[0] }} 
-    <br>
-    <a href="/quiz/{{ quiz[1] }}">Mene kyselyyn</a>
-    <hr>
-    {% endfor %}
-    {% else %}
-    Olet jo vastannut niihin kaikkiin! Kiitos, uusia visoja tulossa myöhemmin.
-    <br>
-    {% endif %}
-    <a href="/logout">Kirjaudu ulos</a>
-    {% else %}
-    <a href="/login">Kirjaudu sisään</a>
-    {% endif %}
+  <div class="header">
+  </div>
+  <div class="content">
+  <p> 
+  {% if session.user_id %}
+  Olet kirjautunut sisään, {{session.username}}.</p>
+  <p>Olit kaikkien aikojen <b>{{session.ordinal}}</b> sovellukseen rekisteröitynyt käyttäjä!</p>
+  <p>Sovelluksessa on tällä hetkellä yhteensä {{ all }} visaa.
+  {% if available > 0 %}
+  Voit vastata vielä {{ available }}. visaan:
+  <nav>
+    <ul>
+      {% for quiz in visible %}
+      <li><a href="/quiz/{{ quiz[1] }}">{{ quiz[0]}}</a></li>
+      <br>
+      {% endfor %}
+    </ul>
+  
+  </nav>
+  {% else %}
+  Olet jo vastannut niihin kaikkiin! Kiitos, uusia visoja tulossa myöhemmin.
+  <br>
+  {% endif %}
+  <br>
+  <a href="/logout">Kirjaudu ulos</a>
+  {% else %}
+  <a href="/login">Kirjaudu sisään</a>
+  {% endif %}
+</div>
 </body>
 </html>

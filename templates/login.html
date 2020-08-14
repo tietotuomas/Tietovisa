@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
+    <link rel='stylesheet' href="static/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tietovisa - kirjaudu</title>
 </head>
 <body>
+  <div class="header">
+  </div>
+  <div class="content">
 <form action="/login" method="post">
 Tunnus: <input type="text" name="username">
 <p>
@@ -14,5 +18,6 @@ Salasana: <input type="password" name="password">
 <input type="submit" value="Kirjaudu">
 </form>
 Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
+</div>
 </body>
 </html>

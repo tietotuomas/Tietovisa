@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
+    <link rel='stylesheet' href="/static/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tietovisa - virhe</title>
 </head>
 <body>
-    Jukupätkä!
-    <br>
-    {{ message }}
-    <br>
-    <a href="/login">Yritä uudestaan</a>
+  <div class="header">
+  </div>
+  <div class="content">
+    {% if session.user_id %}
+        Olet jo vastannut tähän kyselyyn!
+        <br>
+        <a href="/">Takaisin etusivulle</a>
+    {% else %}
+        Jukupätkä!
+        <br>
+        {{ message }}
+        <br>
+        <a href="/login">Yritä uudestaan</a>
+    {% endif %}
     
+</div>
 </body>
 </html>
