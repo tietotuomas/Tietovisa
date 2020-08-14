@@ -1,14 +1,11 @@
 from app import app
 from flask import render_template, request, redirect
-from db import db # kirjautumisen ja rekisteröinnin tietokantatoiminnot eriytetty
-# jo kokonaan omaan moduuliin, tarkoitus eriyttää loputkin tietokantatoiminnot myöhemmin
-from flask import session
-import users, quizzes
+import users, quizzes, utilities
 
 @app.route("/")
 def index():
-    all = quizzes.get_all()
-    done = quizzes.get_done()
+    all = quizzes.get_all_quizzes()
+    done = quizzes.get_done_quizzes()
     visible = []
     for row in all:
         if row in done:
@@ -42,57 +39,49 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if 0 < len(username) <= 15 and 0 < len(password) <= 15 and \
-            users.register(username,password):
+        if users.register(username,password):
             return redirect("/")
         else:
             return render_template("error.html",message="Rekisteröinti ei onnistunut")
 
 @app.route("/quiz/<int:id>")
 def quiz(id):
-    sql = "SELECT topic FROM quizzes WHERE id=:id"
-    result = db.session.execute(sql, {"id":id})
-    topic = result.fetchone()[0]
-    sql = "SELECT id, content FROM questions WHERE quiz_id=:id"
-    result = db.session.execute(sql, {"id":id})
-    questions = result.fetchall()
-    answers = []
-    for q in questions:
-        sql = "SELECT id, content, correct, question_id FROM answers WHERE question_id=:q_id"
-        result = db.session.execute(sql, {"q_id":q[0]})
-        answers += result   
+    done = quizzes.get_done_quizzes()
+    for quiz in done:
+        if quiz[1] == id:
+            return render_template("error.html",message="Olet jo vastannut tähän kyselyyn")
+    topic = quizzes.get_quiz_topic(id)
+    questions = quizzes.get_question_content_and_ids(id)
+    answers = quizzes.get_answers_info(questions)
     return render_template("quiz.html", id=id, topic=topic, questions=questions, answers=answers)
 
 @app.route("/answer", methods=["POST"])
 def answer():
     quiz_id = request.form["id"]
-    # print(request.form)
+    done = quizzes.get_done_quizzes()
+    for quiz in done:
+        if quiz[1] == int(quiz_id):
+            message = "Olet jo vastannut tähän kyselyyn" #(*)ilmeisesti täältä
+            return render_template("error.html",message=message)
     question_ids = request.form.getlist("question")
     answer_ids = []
     for q in question_ids:
         if q in request.form:
             answer_ids.append(request.form[q])
-    user_id = users.user_id()
-    for a in answer_ids:
-        sql = "INSERT INTO user_answers (user_id, answer_id) VALUES (:user, :answer);"
-        db.session.execute(sql, {"user":user_id, "answer":a})
-    db.session.commit()
+    if not answer_ids: #tämä antaa kummallisesti väärän messagen(*)
+        message = "Et vastannut yhteenkään kysymykseen? Yritä edes arvalla."
+        return render_template("error.html",message=message)
+    quizzes.set_answers(answer_ids)
     return redirect("/result/"+str(quiz_id))
 
 @app.route("/result/<int:id>")
 def result(id):
-    sql = "SELECT COUNT(questions.id), quizzes.topic FROM questions \
-        JOIN quizzes ON questions.quiz_id = quizzes.id WHERE quizzes.id = :id \
-        GROUP BY quizzes.topic"
-    result = db.session.execute(sql, {"id":id})
-    q_and_topic = result.fetchone()
-    user_id = users.user_id()
-    sql = "SELECT COUNT(answers.id) FROM answers \
-    JOIN user_answers ON answers.id = user_answers.answer_id \
-    JOIN users ON user_answers.user_id = users.id \
-    JOIN questions ON answers.question_id = questions.id \
-    JOIN quizzes ON questions.quiz_id = quizzes.id \
-    WHERE quizzes.id = :quiz AND answers.correct = TRUE AND users.id = :user"
-    result = db.session.execute(sql, {"quiz":id, "user":user_id})
-    correct = result.fetchone()[0]
-    return render_template("result.html", topic=q_and_topic[1], correct=correct, questions=q_and_topic[0])
+    topic = quizzes.get_quiz_topic(id)
+    questions = quizzes.get_question_content_and_ids(id)
+    answers = quizzes.get_answers_info(questions)
+    user_answers = quizzes.get_user_answers(id)
+    correct = quizzes.get_correct_answers(id)
+    points = correct/len(questions)
+    message = utilities.get_feedback(points)
+    return render_template("result.html", topic=topic, correct=correct, answers=answers, \
+        amount=len(questions), questions=questions, user_answers = user_answers, message = message)
