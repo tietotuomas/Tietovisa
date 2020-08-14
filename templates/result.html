@@ -1,16 +1,67 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
+    <link rel='stylesheet' href="/static/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tietovisa - Tulokset</title>
 </head>
 <body>
+  <div class="header">
+  </div>
+  <div class="content">
 <h3>{{ topic }}</h3>
-<hr>
-Sait <b>{{ correct }} / {{questions}}</b> oikein!
 <br>
-<hr>
+Sait <b>{{ correct }} / {{amount}}</b> oikein!
+<br>
+{{ message }}
+<br>
+
+{% for question in questions %}
+<br>
+{{ question[1] }}
+<br>
+<div class="control">
+{% for answer in answers %}
+
+{% if answer[2] == question[0] and answer[3] == True and answer[0] in user_answers %}
+        <label class="radio">
+            <input type="radio" name="{{question[0]}}" checked>
+            <b>{{ answer[1] }}</b>
+            <br>
+        </label>
+{% elif answer[2] == question[0] and answer[3] == True %}
+        <label class="radio" disabled>
+            <input type="radio" name="{{question[0]}}" disabled>
+            <b>{{ answer[1] }}</b>
+            <br>
+        </label>
+{% elif answer[2] == question[0] and answer[0] in user_answers %}
+        <label class="radio">
+            <input type="radio" name="{{question[0]}}" checked>
+            {{ answer[1] }}
+            <br>
+        </label>
+{% elif answer[2] == question[0] %}
+        <label class="radio" disabled>
+            <input type="radio" name="{{question[0]}}" disabled>
+            {{ answer[1] }}
+            <br>
+        </label>
+
+{% endif %}
+{% endfor %}
+</div>
+{% endfor %}
+
+
+
+
+
+
+<br>
 <a href="/">Takaisin etusivulle</a> 
+
+</div>
 </body>
 </html>
