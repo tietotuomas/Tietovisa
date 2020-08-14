@@ -9,12 +9,12 @@ Kyselyjen, kysymysten tai vastausten vaihtoehtojen (ml. oikeat vastausvaihtoehdo
 
 Perustoiminnot:
 
-- uuden käyttäjän luominen
+- uuden käyttäjätilin luominen (ei salli tyhjiä kenttiä tai liian pitkiä syötteitä)
 - kirjautuminen käyttäjätunnuksella ja salasanalla
 - kaksi eri luokkaa: peruskäyttäjä ja admin
 - adminilla mahdollisuus luoda uusia kyselyjä
 - käyttäjillä mahdollisuus valita haluamansa kysely 
-- automaattinen palaute kyselyn loputtua (mm. oikeiden vastauksien määrä)
+- automaattinen palaute kyselyn loputtua (mm. oikeiden vastauksien määrä ja sanallinen palaute)
 
 Lisäominaisuuksia:
 - tilastojen tarkastelu esim. kuinka usein kysymyksiin on vastattu oikein ja TOP-5 käyttäjät "eniten oikeita vastauksia"
@@ -35,10 +35,13 @@ että Herokun tietokantaan.
 
 Perustoiminnot löytyvät sovelluksesta jollain tasolla lukuunottamatta adminin mahdollisuutta luoda uusia kyselyjä. Tämä on
 tarkoitus luoda seuraavaksi, jonka jälkeen siirryn toteuttamaan "lisäominaisuuksia". Sovelluksen ulkoasuun tai vaadittuun 
-tietoturvaan en ole vielä ehtinyt perehtyä - näihin on tarkoitus siirtyä, kunhan kaikki ominaisuudet on luotu.
+tietoturvaan en ole vielä ehtinyt juuri perehtyä - näihin on tarkoitus siirtyä, kunhan kaikki ominaisuudet on luotu.
 
 Sovellusta voi testata herokussa (http://tietovisa2020.herokuapp.com/) luomalla uuden käyttäjätunnuksen ja vastaamalla kyselyihin. 
-Tunnettu ongelma sovelluksessa on tilanne, jossa käyttäjä ei vastaa kaikkiin kysymyksiin.
+~~Tunnettu ongelma sovelluksessa on tilanne, jossa käyttäjä ei vastaa kaikkiin kysymyksiin.~~ Korjattu. Sen sijaan toiminnalliseksi 
+ongelmaksi jää ainakin se, että käyttäjä voi siirtyä selaimella taaksepäin (tai manuaalisesti osoiteriville URL:n kirjoittamalla) 
+vastatattuaan ja vastata sitten uudestaan. Tämä on sovelluksen kannalta fundamentaalinen ongelma, koska sovelluksen keskeinen periaate
+on, että kyselyihin voi vastata vain kerran per käyttäjä (tai ainakin käyttäjätunnus).
 <br/><br/>
 
 
