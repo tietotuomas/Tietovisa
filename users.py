@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import utilities
 
 def login(username,password):
+    print(generate_password_hash("admin"))
     sql = "SELECT password, id, username, admin FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
@@ -36,4 +37,7 @@ def register(username,password):
     return login(username,password)
 
 def user_id():
-    return session.get("user_id",0)
+    return session.get("user_id")
+
+def is_admin():
+    return session.get("admin")
