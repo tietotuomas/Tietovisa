@@ -10,9 +10,10 @@
   <div class="header">
   </div>
   <div class="content">
+    {% if session.user_id %}
     <h3>{{ topic }}</h3>
     <br>
-    Vastaathan kaikkiin kysymyksiin, voit tehdä kyselyn vain kerran.
+    <i>Vastaathan kaikkiin kysymyksiin, voit tehdä kyselyn vain kerran.</i>
 
 <form action="/answer" method="POST">
 
@@ -36,8 +37,10 @@
 </form>
 
 <br>
-  <a href="/">Takaisin etusivulle</a> 
-  
+<a href="/">Takaisin etusivulle</a>  
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+{% endif %} 
 </div>
 </body>
 </html>

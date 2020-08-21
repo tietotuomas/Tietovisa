@@ -22,6 +22,46 @@ body {
     margin-top: 1em;
 }
 
+.login {
+    padding: 0.5em;
+    background: lightgrey;
+    border-radius: .5em;
+    display: grid;
+    max-width: 15em;
+    grid-template-columns: 5em 10em;
+}
+
+#button1 {
+    
+    padding:5px;
+    border: none;
+    text-align: center;
+    width: 15.5em;
+    background: grey;
+    border-radius: 0.5em;
+    margin-top: 0.5em;
+
+}
+
+.button2 {
+    
+    padding:5px;
+    border: none;
+    text-align: center;
+    width: 15.5em;
+    background: grey;
+    border-radius: 0.5em;
+    margin-top: 0.5em;
+
+}
+
+#button1:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+.button2:hover {
+    background-color: rgb(226, 226, 226);
+}
 nav li {
     padding: 1em 0em;
     display: inline-block;
