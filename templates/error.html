@@ -10,15 +10,18 @@
   <div class="header">
   </div>
   <div class="content">
+    <h3>{{ random_message }}</h3>
     {% if session.user_id %}
-        Olet jo vastannut tähän kyselyyn!
-        <br>
+        <p>
+          {{ error_message }}
+        </p>
+        
         <a href="/">Takaisin etusivulle</a>
     {% else %}
-        Jukupätkä!
-        <br>
-        {{ message }}
-        <br>
+        <p>
+            {{ error_message }}
+        </p>
+    
         <a href="/login">Yritä uudestaan</a>
     {% endif %}
     
