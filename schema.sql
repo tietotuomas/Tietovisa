@@ -23,14 +23,16 @@ CREATE TABLE user_answers (
     user_id INTEGER REFERENCES users,
     answer_id INTEGER REFERENCES answers
 );
+INSERT INTO users (username, password, admin) VALUES ('Sysop', 'pbkdf2:sha256:150000$oe3RO5xV$8ce516a4e8507953ea5ad617b0a76c3291bc7454008525dbac8ddd013a871b09',
+TRUE);
 INSERT INTO quizzes (topic) VALUES ('Matematiikkaa englanniksi');
 INSERT INTO quizzes (topic) VALUES ('Googlatuin tv-sarja');
 INSERT INTO quizzes (topic) VALUES ('Katukuulustelu Helsinki');
 INSERT INTO questions (content, quiz_id) VALUES ('Mitä on vähentää englanniksi?', 1);
 INSERT INTO questions (content, quiz_id) VALUES ('Mitä on yhteenlasku englanniksi?', 1);
 INSERT INTO questions (content, quiz_id) VALUES ('Mitä on kertoma englanniksi?', 1);
-INSERT INTO questions (content, quiz_id) VALUES ('Mitä on dividend suomeksi?', 1);
 INSERT INTO questions (content, quiz_id) VALUES ('Mitä on tulo englanniksi?', 1);
+INSERT INTO questions (content, quiz_id) VALUES ('Mitä on dividend suomeksi?', 1);
 INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli maailmanlaajuisesti googlatuin tv-sarja vuonna 2019?', 2);
 INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli maailmanlaajuisesti googlatuin tv-sarja vuonna 2012?', 2);
 INSERT INTO questions (content, quiz_id) VALUES ('Mikä oli googlatuin tv-sarja Suomessa vuonna 2018?', 2);
@@ -58,14 +60,14 @@ INSERT INTO answers (content, question_id, correct) VALUES ('difference', 3, FAL
 INSERT INTO answers (content, question_id, correct) VALUES ('factorial', 3, TRUE);
 INSERT INTO answers (content, question_id, correct) VALUES ('permutation', 3, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('factory', 3, FALSE);
-INSERT INTO answers (content, question_id, correct) VALUES ('erotus', 4, FALSE);
-INSERT INTO answers (content, question_id, correct) VALUES ('jakaja', 4, FALSE);
-INSERT INTO answers (content, question_id, correct) VALUES ('jaettava', 4, TRUE);
-INSERT INTO answers (content, question_id, correct) VALUES ('osamäärä', 4, FALSE);
-INSERT INTO answers (content, question_id, correct) VALUES ('prompt', 5, FALSE);
-INSERT INTO answers (content, question_id, correct) VALUES ('product', 5, TRUE);
-INSERT INTO answers (content, question_id, correct) VALUES ('abdominal', 5, FALSE);
-INSERT INTO answers (content, question_id, correct) VALUES ('abduct', 5, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('prompt', 4, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('product', 4, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('abdominal', 4, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('abduct', 4, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('erotus', 5, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('jakaja', 5, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('jaettava', 5, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('osamäärä', 5, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('American Ninja', 6, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('American Idol', 6, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Better Call Saul', 6, FALSE);
@@ -98,7 +100,7 @@ INSERT INTO answers (content, question_id, correct) VALUES ('Malminkartanossa', 
 INSERT INTO answers (content, question_id, correct) VALUES ('Pasilassa', 14, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Meilahdessa', 14, TRUE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Pikku Huopalahdessa', 14, FALSE);
-INSERT INTO answers (content, question_id, correct) VALUES ('Itäkeskuksessa', 15, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Puistolassa', 15, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Kaisaniemessä', 15, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Ullanlinnassa', 15, TRUE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Hakaniemessä', 16, FALSE);
@@ -116,3 +118,4 @@ INSERT INTO answers (content, question_id, correct) VALUES ('Tehtaankadulla', 19
 INSERT INTO answers (content, question_id, correct) VALUES ('Yliopistonkadulla', 20, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Pietari Kalmin kadulla', 20, TRUE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Gustaf Hällströmin kadulla', 20, FALSE);
+
