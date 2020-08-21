@@ -25,11 +25,71 @@ def login():
         if users.login(username,password):
             return redirect("/")
         else:
-            return render_template("error.html",message="Väärä tunnus tai salasana")
+            return render_template("error.html",error_message="Väärä tunnus tai salasana", \
+                random_message = utilities.get_random_message())
 
 @app.route("/logout")
 def logout():
     users.logout()
+    return redirect("/")
+
+@app.route("/draft")
+def draft():
+    if not users.is_admin:
+        return render_template("error.html", error_message="Sinulla ei ole oikeutta luoda uutta visaa!", \
+            random_message = utilities.get_random_message())
+    return render_template("draft.html")
+
+@app.route("/new", methods=["POST"])
+def new():
+    if not users.is_admin:
+        return render_template("error.html", error_message="Sinulla ei ole oikeutta luoda uutta visaa!", \
+            random_message = utilities.get_random_message())
+    topic = request.form["topic"]
+    number_of_questions = int(request.form["questions"])
+    number_of_choices = int(request.form["choices"])
+    return render_template("new.html", topic=topic, choices = number_of_choices, \
+        questions = number_of_questions)
+
+@app.route("/create", methods=["POST"])
+def create():
+    topic = request.form["topic"]
+    number_of_choices = request.form["choices"]
+    questions = request.form.getlist("question")
+    choices = request.form.getlist("choice")
+    correct = request.form.getlist("correct")
+
+    for question in questions:
+        if question == "":
+            return render_template("error.html",error_message="Et täyttänyt kaikkia kenttiä!", \
+                random_message = utilities.get_random_message())
+        if len(question) > 200:
+            return render_template("error.html",error_message="Liian pitkä syöte kysymyksessä, \
+                kysymys saa sisältää korkeintaan 200 merkkiä.", random_message = utilities.get_random_message())
+    for choice in choices:
+        if choice == "":
+            return render_template("error.html",error_message="Et täyttänyt kaikkia kenttiä!", \
+                random_message = utilities.get_random_message())
+        if len(choice) > 100:
+            return render_template("error.html",error_message="Liian pitkä syöte vaihtoehdossa, \
+                vaihtoehto saa sisältää korkeintaan 100 merkkiä.", random_message = utilities.get_random_message())    
+    print(quizzes.get_number_of_questions())
+    quizzes.create_quiz(topic)
+    quiz_id = quizzes.get_number_of_quizzes()
+    question_id = quizzes.get_number_of_questions()
+    
+    j=0
+    for question in questions:
+        i=0
+        question_id += 1
+        quizzes.create_question(question, quiz_id)
+        print(question, quiz_id)
+        while i < int(number_of_choices):
+            quizzes.create_answer(choices[j], question_id, correct[j])
+            print(choices[j], correct[j], question_id)
+            i += 1
+            j += 1
+
     return redirect("/")
 
 @app.route("/register", methods=["get","post"])
@@ -42,14 +102,16 @@ def register():
         if users.register(username,password):
             return redirect("/")
         else:
-            return render_template("error.html",message="Rekisteröinti ei onnistunut")
+            return render_template("error.html",error_message="Rekisteröinti ei onnistunut", \
+                random_message = utilities.get_random_message())
 
 @app.route("/quiz/<int:id>")
 def quiz(id):
     done = quizzes.get_done_quizzes()
     for quiz in done:
         if quiz[1] == id:
-            return render_template("error.html",message="Olet jo vastannut tähän kyselyyn")
+            return render_template("error.html",error_message="Olet jo vastannut tähän kyselyyn!", \
+                random_message = utilities.get_random_message())
     topic = quizzes.get_quiz_topic(id)
     questions = quizzes.get_question_content_and_ids(id)
     answers = quizzes.get_answers_info(questions)
@@ -61,16 +123,16 @@ def answer():
     done = quizzes.get_done_quizzes()
     for quiz in done:
         if quiz[1] == int(quiz_id):
-            message = "Olet jo vastannut tähän kyselyyn" #(*)ilmeisesti täältä
-            return render_template("error.html",message=message)
+            return render_template("error.html",error_message="Olet jo vastannut tähän kyselyyn!", \
+                random_message = utilities.get_random_message())
     question_ids = request.form.getlist("question")
     answer_ids = []
-    for q in question_ids:
-        if q in request.form:
-            answer_ids.append(request.form[q])
-    if not answer_ids: #tämä antaa kummallisesti väärän messagen(*)
-        message = "Et vastannut yhteenkään kysymykseen? Yritä edes arvalla."
-        return render_template("error.html",message=message)
+    for question in question_ids:
+        if question in request.form:
+            answer_ids.append(request.form[question])
+    if not answer_ids:
+        return render_template("error.html",error_message="Et vastannut yhteenkään kysymykseen? Yritä edes arvalla!", \
+            random_message = utilities.get_random_message())
     quizzes.set_answers(answer_ids)
     return redirect("/result/"+str(quiz_id))
 
@@ -82,6 +144,6 @@ def result(id):
     user_answers = quizzes.get_user_answers(id)
     correct = quizzes.get_correct_answers(id)
     points = correct/len(questions)
-    message = utilities.get_feedback(points)
+    feedback_message = utilities.get_feedback(points)
     return render_template("result.html", topic=topic, correct=correct, answers=answers, \
-        amount=len(questions), questions=questions, user_answers = user_answers, message = message)
+        amount=len(questions), questions=questions, user_answers = user_answers, message = feedback_message)

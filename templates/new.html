@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <link rel='stylesheet' href="static/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tietovisa - Uusi</title>
+</head>
+<body>
+  <div class="header">
+  </div>
+  <div class="content">
+    <h3>{{ topic }}</h3>
+    <i>Muista täyttää kaikki kohdat.</i>
+    <br>
+    <form action="/create" method="POST">
+    {% for i in range(1, questions+1) %}
+        <p>
+        Kysymys numero {{ i }}:<br>
+        <input type="text" name="question" size="40"><br>
+        {% for j in range(1, choices+1) %}
+            Vaihtoehto {{ j }}:<br>
+            <input type="text" name="choice" size="25">
+            <!-- <input type="hidden" name="id" value="{{ j }}"> -->
+            <select name=correct>
+            <option value=True> Tosi
+            <option value=False selected> Epätosi
+            </select>
+            <br>
+        {% endfor %}
+
+        </p>
+    {% endfor %}
+    <input type="submit" value="Luo uusi visa">
+    <input type="hidden" name="topic" value="{{ topic }}">
+    <input type="hidden" name="choices" value="{{ choices }}">
+    </form>
+    <br>
+    <a href="/">Takaisin etusivulle</a> 
+</div>
+</body>
+</html>
