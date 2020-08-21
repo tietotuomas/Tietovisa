@@ -15,8 +15,19 @@
   Olet kirjautunut sisään, {{session.username}}.</p>
   <p>Olit kaikkien aikojen <b>{{session.ordinal}}</b> sovellukseen rekisteröitynyt käyttäjä!</p>
   <p>Sovelluksessa on tällä hetkellä yhteensä {{ all }} visaa.
-  {% if available > 0 %}
-  Voit vastata vielä {{ available }}. visaan:
+  {% if available == 1 %}
+  On vielä yksi visa, johon et ole vastannut:</p>
+  <nav>
+    <ul>
+      {% for quiz in visible %}
+      <li><a href="/quiz/{{ quiz[1] }}">{{ quiz[0]}}</a></li>
+      <br>
+      {% endfor %}
+    </ul>
+  
+  </nav>
+  {% elif available > 1  %}
+  On vielä {{ available }} visaa, joihin et ole vastannut:
   <nav>
     <ul>
       {% for quiz in visible %}
@@ -29,6 +40,10 @@
   {% else %}
   Olet jo vastannut niihin kaikkiin! Kiitos, uusia visoja tulossa myöhemmin.
   <br>
+  {% endif %}
+  <br>
+  {% if session.admin == True %}
+  <a href="/draft">Luo uusi kysely</a><br>
   {% endif %}
   <br>
   <a href="/logout">Kirjaudu ulos</a>
