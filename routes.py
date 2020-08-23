@@ -152,5 +152,4 @@ def stats():
     top5 = quizzes.get_top5_users()
     personal_stats = [quizzes.get_all_correct_answers(), quizzes.get_done_answers()]
     registration_time = users.get_registration_time()
-    print(type(registration_time))
     return render_template("stats.html", top5 = top5, personal = personal_stats, time = registration_time)
