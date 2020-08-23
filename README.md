@@ -46,7 +46,9 @@ Kursivoidut kohdat ovat puuttuvia ominaisuuksia, joita yritän viimeisen viikon 
 ehdotusten jäljiltä jää, myös sovelluksen ulkoasua olisi tarkoitus hieman hioa.
 
 Sovellusta voi testata osoitteessa https://tietovisa2020.herokuapp.com/ luomalla uuden käyttäjätunnuksen ja/tai käyttämällä admin-tason käyttäjätunnusta:
+<br/><br/>
 <b>Käyttäjätunnus: Sysop
+<br/><br/>
 Salasana: admin</b>
 <br/><br/>
 
