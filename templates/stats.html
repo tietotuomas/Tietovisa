@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <link rel='stylesheet' href="/static/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tietovisa - Tilastot</title>
+</head>
+<body>
+  <div class="header">
+  </div>
+  <div class="content">
+    {% if session.user_id %}
+    <h2>Tilastot</h2>
+
+    <p>Sinulle myönnettiin käyttöoikeus sovellukseen <b>{{ time.strftime("%d.%m.%Y") }}</b> 
+        kello <b>{{ time.strftime("%H:%M:%S") }}</b>.</p>
+    <p>Olit kaikkien aikojen <b>{{session.ordinal}}</b> sovellukseen rekisteröitynyt käyttäjä.</p>
+    <p>Olet vastannut oikein yhteensä <b>{{ personal[0] }}</b> kysymykseen {{ personal[1] }}. kysymyksestä.</p>
+    
+    
+    <h4>Eniten oikeita vastauksia</h4>
+    <table>
+        <tr>
+          <th>Käyttäjä</th>
+          <th>Vastaukset</th>
+        </tr>
+        {% for stat in top5 %}
+        <tr>
+          <td>{{ stat[0] }}</td>
+          <td>{{ stat[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+
+    <p><a href="/">Takaisin etusivulle</a></p>  
+    {% else %}
+    <a href="/login">Kirjaudu sisään</a>
+    {% endif %} 
+</div>
+</body>
+</html>
