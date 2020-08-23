@@ -17,17 +17,19 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    admin BOOLEAN
+    admin BOOLEAN,
+    created_at TIMESTAMP
 );
 CREATE TABLE user_answers ( 
     user_id INTEGER REFERENCES users,
     answer_id INTEGER REFERENCES answers
 );
-INSERT INTO users (username, password, admin) VALUES ('Sysop', 'pbkdf2:sha256:150000$oe3RO5xV$8ce516a4e8507953ea5ad617b0a76c3291bc7454008525dbac8ddd013a871b09',
-TRUE);
+INSERT INTO users (username, password, admin, created_at) VALUES ('Sysop', 'pbkdf2:sha256:150000$oe3RO5xV$8ce516a4e8507953ea5ad617b0a76c3291bc7454008525dbac8ddd013a871b09',
+TRUE, NOW());
 INSERT INTO quizzes (topic) VALUES ('Matematiikkaa englanniksi');
 INSERT INTO quizzes (topic) VALUES ('Googlatuin tv-sarja');
 INSERT INTO quizzes (topic) VALUES ('Katukuulustelu Helsinki');
+INSERT INTO quizzes (topic) VALUES ('Jääkiekkoilijoiden lempinimet');
 INSERT INTO questions (content, quiz_id) VALUES ('Mitä on vähentää englanniksi?', 1);
 INSERT INTO questions (content, quiz_id) VALUES ('Mitä on yhteenlasku englanniksi?', 1);
 INSERT INTO questions (content, quiz_id) VALUES ('Mitä on kertoma englanniksi?', 1);
@@ -48,6 +50,14 @@ INSERT INTO questions (content, quiz_id) VALUES ('Missä kaupunginosassa sijaits
 INSERT INTO questions (content, quiz_id) VALUES ('Millä kadulla sijaitsee Marski?', 3);
 INSERT INTO questions (content, quiz_id) VALUES ('Millä kadulla sijaitsee Venäjän suurlähetystö?', 3);
 INSERT INTO questions (content, quiz_id) VALUES ('Millä kadulla sijaitsee Kumpulan kampuksen Exactum-rakennus?', 3);
+INSERT INTO questions (content, quiz_id) VALUES ('Kuka leijona-legenda tunnetaan myös nimellä "Brother Lion 79"?', 4);
+INSERT INTO questions (content, quiz_id) VALUES ('Kuka leijona-legenda tunnetaan myös nimellä "Rautakansleri"?', 4);
+INSERT INTO questions (content, quiz_id) VALUES ('Kuka aktiivipelaaja tunnetaan myös nimellä "Professori"?', 4);
+INSERT INTO questions (content, quiz_id) VALUES ('Kuka aktiivipelaaja tunnetaan myös nimellä "Sasha"?', 4);
+INSERT INTO questions (content, quiz_id) VALUES ('Millä nimellä Marko Anttila myös tunnetaan?', 4);
+INSERT INTO questions (content, quiz_id) VALUES ('Millä nimellä Antti Pihlström myös tunnetaan?', 4);
+INSERT INTO questions (content, quiz_id) VALUES ('Millä nimellä Veli-Matti Savinainen myös tunnetaan?', 4);
+INSERT INTO questions (content, quiz_id) VALUES ('Millä nimellä Mikael Granlund myös tunnetaan?', 4);
 INSERT INTO answers (content, question_id, correct) VALUES ('subtract', 1, TRUE);
 INSERT INTO answers (content, question_id, correct) VALUES ('distract', 1, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('submit', 1, FALSE);
@@ -118,4 +128,35 @@ INSERT INTO answers (content, question_id, correct) VALUES ('Tehtaankadulla', 19
 INSERT INTO answers (content, question_id, correct) VALUES ('Yliopistonkadulla', 20, FALSE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Pietari Kalmin kadulla', 20, TRUE);
 INSERT INTO answers (content, question_id, correct) VALUES ('Gustaf Hällströmin kadulla', 20, FALSE);
-
+INSERT INTO answers (content, question_id, correct) VALUES ('Veli-Pekka Ketola', 21, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Jukka Tammi', 21, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Juhani Tamminen', 21, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Teemu Selänne', 21, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Olli Jokinen', 22, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Kalervo Kummola', 22, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Raimo Helminen', 22, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Teemu Selänne', 22, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Jesse Puljujärvi', 23, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Sebastian Aho', 23, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Patrik Laine', 23, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Teemu Pukki', 23, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Alexander Ovechkin', 24, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Sami Vatanen', 24, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Jonathan Huberdeau', 24, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Aleksander Barkov', 24, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Mörkö', 25, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Rölli', 25, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Trolli', 25, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Pikku Myy', 25, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Pille', 26, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Pelle', 26, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Muna', 26, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Pillu', 26, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Terminaattori', 27, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Arska', 27, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Commando', 27, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Predaattori', 27, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Bruce', 28, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Finnish Baby Jesus', 28, TRUE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Mickey Mouse', 28, FALSE);
+INSERT INTO answers (content, question_id, correct) VALUES ('Magic Mike', 28, TRUE);
