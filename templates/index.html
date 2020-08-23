@@ -13,8 +13,8 @@
   <p> 
   {% if session.user_id %}
   Olet kirjautunut sisään, {{session.username}}.</p>
-  <p>Sovelluksessa on tällä hetkellä yhteensä {{ all }} visaa.
-  {% if available == all %}:</p>
+  <p>Sovelluksessa on tällä hetkellä yhteensä {{ all }} visaa:
+  {% if available == all %}</p>
   <nav>
     <ul>
       {% for quiz in visible %}
