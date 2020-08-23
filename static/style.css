@@ -43,7 +43,7 @@ body {
 
 }
 
-.button2 {
+/* .button2 {
     
     padding:5px;
     border: none;
@@ -53,15 +53,16 @@ body {
     border-radius: 0.5em;
     margin-top: 0.5em;
 
-}
+} */
 
 #button1:hover {
     background-color: rgb(226, 226, 226);
 }
 
-.button2:hover {
+/* .button2:hover {
     background-color: rgb(226, 226, 226);
-}
+} */
+
 nav li {
     padding: 1em 0em;
     display: inline-block;
@@ -83,6 +84,22 @@ nav li:hover {
 nav ul {
     padding: 0;
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 75%;
+  }
+  
+  td, th {
+    border: 1px dashed #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
 
 
 

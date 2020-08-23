@@ -11,7 +11,6 @@ def index():
         if row in done:
             continue
         visible.append(row)
-
     return render_template("index.html", all=len(all), available=len(visible),\
         visible=visible)
 
@@ -147,3 +146,11 @@ def result(id):
     feedback_message = utilities.get_feedback(points)
     return render_template("result.html", topic=topic, correct=correct, answers=answers, \
         amount=len(questions), questions=questions, user_answers = user_answers, message = feedback_message)
+
+@app.route("/stats")
+def stats():
+    top5 = quizzes.get_top5_users()
+    personal_stats = [quizzes.get_all_correct_answers(), quizzes.get_done_answers()]
+    registration_time = users.get_registration_time()
+    print(type(registration_time))
+    return render_template("stats.html", top5 = top5, personal = personal_stats, time = registration_time)

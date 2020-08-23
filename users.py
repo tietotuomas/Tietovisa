@@ -22,13 +22,16 @@ def login(username,password):
 
 def logout():
     del session["user_id"]
+    del session["username"]
+    del session["admin"]
+    del session["ordinal"]
 
 def register(username,password):
     hash_value = generate_password_hash(password)
     
     try:
         if 2 < len(username) <= 15 and 2 < len(password) <= 15:
-            sql = "INSERT INTO users (username,password) VALUES (:username,:password)"
+            sql = "INSERT INTO users (username,password,created_at) VALUES (:username,:password, NOW())"
             db.session.execute(sql, {"username":username,"password":hash_value})
             db.session.commit()
         else: raise ValueError("Invalid length.")
@@ -38,6 +41,12 @@ def register(username,password):
 
 def user_id():
     return session.get("user_id")
+
+def get_registration_time():
+    user = user_id()
+    sql = "SELECT created_at FROM users WHERE users.id = :user"
+    result = db.session.execute(sql, {"user":user})
+    return result.fetchone()[0]
 
 def is_admin():
     return session.get("admin")
