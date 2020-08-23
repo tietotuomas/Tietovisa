@@ -5,7 +5,7 @@ http://tietovisa2020.herokuapp.com/
 
 Tämä tietokantasovellus soveltuu sekä hyöty- että hupikäyttöön. Ylläpitäjä voi luoda kyselyjä esim. opiskelukäyttöön 
 tai tietovisa-hengessä ajanvietteeksi. Käyttäjät voivat vastata haluamiinsa kyselyihin (kerran per kysely) ja tarkastella 
-tilastoja. Kysymyksien vastausvaihtoehdot toteutetaan automaattisesti tarkistettavina monivalintointa.
+tilastoja. Kysymyksien vastausvaihtoehdot toteutetaan automaattisesti tarkistettavina monivalintoina.
 
 Perustoiminnot:
 
@@ -25,7 +25,7 @@ Muita toiminnallisuuksia/teknisiä ominaisuuksia:
 sivuja, vain admin pääsee kyselyjen luontiin jne)
 - etusivu kertoo kyselyjen kokonaismäärän ja näyttää kyselyt, joihin käyttäjä ei ole vielä vastannut
 - käyttäjä voi vastata kyselyyn vain kerran (ei pääse vastaamaan uudestaan selaimen taaksepäin-toiminnolla, eikä osoiterivin avulla)
-- sovellus ei salli kokonaan tyhjän kyselyn lähettämistä, vähitään yksi vastaus vaaditaan
+- sovellus ei salli kokonaan tyhjän kyselyn lähettämistä, vähintään yksi vastaus vaaditaan
 - vastaamisen jälkeen käyttäjä näkee oikeiden vastauksiensa määrän sekä kysymyskohtaisesti oikeat ja valitsemansa vastaukset
 - käyttäjä saa samalla "pisteidensä" perusteella sanallisen palautteen sattumanvaraisesti muutamasta vaihtoehdosta
 - tilastoissa rekisteröintitiedot (milloin ja monesko käyttäjä)
