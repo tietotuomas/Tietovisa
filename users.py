@@ -15,7 +15,7 @@ def login(username,password):
             session["user_id"] = user[1]
             session["username"] = user[2]
             session["admin"] = user[3]
-            session["ordinal"] = utilities.get_ordinal(user[1])              
+                          
             return True
         else:
             return False
@@ -24,7 +24,6 @@ def logout():
     del session["user_id"]
     del session["username"]
     del session["admin"]
-    del session["ordinal"]
 
 def test_length(username, password):
     if 2 < len(username) <= 15 and 2 < len(password) <= 15:
@@ -49,6 +48,9 @@ def get_registration_time():
     sql = "SELECT created_at FROM users WHERE users.id = :user"
     result = db.session.execute(sql, {"user":user})
     return result.fetchone()[0]
+
+def get_ordinal():
+    return utilities.get_ordinal(session.get("user_id"))
 
 def is_admin():
     return session.get("admin")
