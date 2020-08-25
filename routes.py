@@ -72,7 +72,7 @@ def create():
         if len(choice) > 100:
             return render_template("error.html",error_message="Liian pitkä syöte vaihtoehdossa, \
                 vaihtoehto saa sisältää korkeintaan 100 merkkiä.", random_message = utilities.get_random_message())    
-    print(quizzes.get_number_of_questions())
+    
     quizzes.create_quiz(topic)
     quiz_id = quizzes.get_number_of_quizzes()
     question_id = quizzes.get_number_of_questions()
@@ -98,11 +98,14 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        if not users.test_length(username, password):
+            return render_template("error.html", error_message="Rekisteröinti ei onnistunut, \
+                tarkista käyttäjätunnuksen ja salasanan pituus.", random_message = utilities.get_random_message())
         if users.register(username,password):
             return redirect("/")
         else:
-            return render_template("error.html",error_message="Rekisteröinti ei onnistunut", \
-                random_message = utilities.get_random_message())
+            return render_template("error.html", error_message="Rekisteröinti ei onnistunut, \
+                käyttäjätunnus on jo käytössä.", random_message = utilities.get_random_message())
 
 @app.route("/quiz/<int:id>")
 def quiz(id):

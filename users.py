@@ -8,7 +8,7 @@ def login(username,password):
     sql = "SELECT password, id, username, admin FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
-    if user == None:
+    if user == None: #tämä turha?
         return False
     else:
         if check_password_hash(user[0],password):
@@ -26,15 +26,17 @@ def logout():
     del session["admin"]
     del session["ordinal"]
 
+def test_length(username, password):
+    if 2 < len(username) <= 15 and 2 < len(password) <= 15:
+        return True
+    return False
+
 def register(username,password):
     hash_value = generate_password_hash(password)
-    
-    try:
-        if 2 < len(username) <= 15 and 2 < len(password) <= 15:
-            sql = "INSERT INTO users (username,password,created_at) VALUES (:username,:password, NOW())"
-            db.session.execute(sql, {"username":username,"password":hash_value})
-            db.session.commit()
-        else: raise ValueError("Invalid length.")
+    try: 
+        sql = "INSERT INTO users (username,password,created_at) VALUES (:username,:password, NOW())"
+        db.session.execute(sql, {"username":username,"password":hash_value})
+        db.session.commit()
     except:
         return False
     return login(username,password)
