@@ -77,18 +77,13 @@ def create():
     quiz_id = quizzes.get_number_of_quizzes()
     question_id = quizzes.get_number_of_questions()
     
-    j=0
+    answer_index=0
     for question in questions:
-        i=0
         question_id += 1
         quizzes.create_question(question, quiz_id)
-        print(question, quiz_id)
-        while i < int(number_of_choices):
-            quizzes.create_answer(choices[j], question_id, correct[j])
-            print(choices[j], correct[j], question_id)
-            i += 1
-            j += 1
-
+        for choice in range (int(number_of_choices)):
+            quizzes.create_answer(choices[answer_index], question_id, correct[answer_index])
+            answer_index += 1
     return redirect("/")
 
 @app.route("/register", methods=["get","post"])
