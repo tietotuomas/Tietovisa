@@ -104,11 +104,9 @@ def register():
 
 @app.route("/quiz/<int:id>")
 def quiz(id):
-    done = quizzes.get_done_quizzes()
-    for quiz in done:
-        if quiz[1] == id:
-            return render_template("error.html",error_message="Olet jo vastannut tähän kyselyyn!", \
-                random_message = utilities.get_random_message())
+    if quizzes.is_done(id):
+        return render_template("error.html",error_message="Olet jo vastannut tähän kyselyyn!", \
+            random_message = utilities.get_random_message())
     topic = quizzes.get_quiz_topic(id)
     questions = quizzes.get_question_content_and_ids(id)
     answers = quizzes.get_answers_info(questions)
@@ -117,11 +115,6 @@ def quiz(id):
 @app.route("/answer", methods=["POST"])
 def answer():
     quiz_id = request.form["id"]
-    done = quizzes.get_done_quizzes()
-    for quiz in done:
-        if quiz[1] == int(quiz_id):
-            return render_template("error.html",error_message="Olet jo vastannut tähän kyselyyn!", \
-                random_message = utilities.get_random_message())
     question_ids = request.form.getlist("question")
     answer_ids = []
     for question in question_ids:
@@ -135,6 +128,9 @@ def answer():
 
 @app.route("/result/<int:id>")
 def result(id):
+    if not quizzes.is_done(id):
+        return render_template("error.html",error_message="Et ole vielä vastannut tähän kyselyyn!", \
+            random_message = utilities.get_random_message())
     topic = quizzes.get_quiz_topic(id)
     questions = quizzes.get_question_content_and_ids(id)
     answers = quizzes.get_answers_info(questions)
@@ -151,4 +147,5 @@ def stats():
     personal_stats = [quizzes.get_all_correct_answers(), quizzes.get_done_answers()]
     registration_time = users.get_registration_time()
     registration_number = users.get_ordinal()
-    return render_template("stats.html", ordinal = registration_number, top5 = top5, personal = personal_stats, time = registration_time)
+    return render_template("stats.html", ordinal = registration_number, top5 = top5, personal = personal_stats, \
+        time = registration_time)

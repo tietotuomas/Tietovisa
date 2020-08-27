@@ -16,6 +16,19 @@ def get_number_of_questions():
     result = db.session.execute(sql)
     return result.fetchone()[0]
 
+def is_done(quiz):
+    user = users.user_id()
+    sql = "SELECT quizzes.id FROM quizzes \
+        JOIN questions ON quizzes.id = questions.quiz_id \
+        JOIN answers ON questions.id = answers.question_id \
+        JOIN user_answers ON answers.id = user_answers.answer_id \
+        JOIN users ON user_answers.user_id = users.id\
+        WHERE users.id = :user AND quizzes.id = :quiz"
+    result = db.session.execute(sql, {"user":user, "quiz":quiz})
+    if result.fetchone() != None:
+        return True
+    return False
+
 def get_done_quizzes():
     user = users.user_id()
     sql = "SELECT DISTINCT quizzes.topic, quizzes.id FROM answers\
@@ -28,15 +41,17 @@ def get_done_quizzes():
     return result.fetchall()
 
 def get_done_answers():
-    quizzes = get_done_quizzes()
-    total = 0
-    for quiz in quizzes:
-        sql = "SELECT COUNT(questions.id) FROM questions \
+    done_quizzes = get_done_quizzes()
+    if not done_quizzes:
+        return 0
+    quiz_ids = []
+    for quiz in done_quizzes:
+        quiz_ids.append(quiz[1])
+    sql = "SELECT COUNT(questions.id) FROM questions \
         JOIN quizzes ON questions.quiz_id = quizzes.id \
-        WHERE quizzes.id = :id"
-        result = db.session.execute(sql, {"id":quiz[1]})
-        total += result.fetchone()[0]
-    return total        
+        WHERE quizzes.id IN :quizzes"
+    result = db.session.execute(sql, {"quizzes":tuple(quiz_ids)})
+    return result.fetchone()[0]        
 
 def get_quiz_topic(id):
     sql = "SELECT topic FROM quizzes WHERE id=:id"
@@ -80,12 +95,14 @@ def get_all_correct_answers():
     return result.fetchone()[0]
  
 def get_answers_info(questions):
-    answers = []
+    question_ids = []
     for question in questions:
-        sql = "SELECT id, content, question_id, correct FROM answers WHERE question_id=:q_id"
-        result = db.session.execute(sql, {"q_id":question[0]})
-        answers += result.fetchall()
-    return answers
+        question_ids.append(question[0])
+    sql = "SELECT id, content, question_id, correct FROM answers \
+        WHERE question_id IN :questions"
+    result = db.session.execute(sql, {"questions":tuple(question_ids)})
+    return result.fetchall()
+    
 
 def set_answers(answer_ids):
     user = users.user_id()
