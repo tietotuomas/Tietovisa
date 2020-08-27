@@ -19,10 +19,10 @@ Perustoiminnot:
 
 Muita toiminnallisuuksia/teknisiä ominaisuuksia:
 
-- käyttäjätilin kentät eivät salli tyhjiä tai liian pitkiä syötteitä
+- käyttäjätilin luonnissa kentät eivät salli tyhjiä tai liian pitkiä syötteitä
 - uuden kyselyn laatimista varten luodut kentät eivät salli tyhjiä tai liian pitkiä syötteitä
 - sopimaton manuaalinen navigointi selaimen osoiterivin kautta estetty (vain kirjautunut käyttäjä pääsee tarkastelemaan sovelluksen
-sivuja, vain admin pääsee kyselyjen luontiin jne)
+sivuja, vain admin pääsee kyselyjen luontiin, käyttäjä ei pääse katselemaan tekemättömien kyselyiden tulossivuja, jne)
 - etusivu kertoo kyselyjen kokonaismäärän ja näyttää kyselyt, joihin käyttäjä ei ole vielä vastannut
 - käyttäjä voi vastata kyselyyn vain kerran (ei pääse vastaamaan uudestaan selaimen taaksepäin-toiminnolla, eikä osoiterivin avulla)
 - sovellus ei salli kokonaan tyhjän kyselyn lähettämistä, vähintään yksi vastaus vaaditaan
