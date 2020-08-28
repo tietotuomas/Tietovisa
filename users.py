@@ -8,8 +8,8 @@ def login(username,password):
     sql = "SELECT password, id, username, admin FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
-    # if user == None: tämä turha?
-    #     return False
+    if user == None:
+        return False
     else:
         if check_password_hash(user[0],password):
             session["user_id"] = user[1]
