@@ -73,14 +73,10 @@ def create():
             return render_template("error.html",error_message="Liian pitkä syöte vaihtoehdossa, \
                 vaihtoehto saa sisältää korkeintaan 100 merkkiä.", random_message = utilities.get_random_message())    
     
-    quizzes.create_quiz(topic)
-    quiz_id = quizzes.get_number_of_quizzes()
-    question_id = quizzes.get_number_of_questions()
-    
+    quiz_id = quizzes.create_quiz(topic)
     answer_index=0
     for question in questions:
-        question_id += 1
-        quizzes.create_question(question, quiz_id)
+        question_id = quizzes.create_question(question, quiz_id)
         for choice in range (int(number_of_choices)):
             quizzes.create_answer(choices[answer_index], question_id, correct[answer_index])
             answer_index += 1

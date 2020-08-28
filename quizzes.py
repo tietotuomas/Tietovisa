@@ -23,11 +23,6 @@ def get_number_of_quizzes():
     result = db.session.execute(sql)
     return result.fetchone()[0]
 
-def get_number_of_questions():
-    sql = "SELECT COUNT(*) FROM questions"
-    result = db.session.execute(sql)
-    return result.fetchone()[0]
-
 def is_done(quiz):
     user = users.user_id()
     sql = "SELECT quizzes.id FROM quizzes \
@@ -124,14 +119,16 @@ def set_answers(answer_ids):
     db.session.commit()
 
 def create_quiz(topic):
-    sql = "INSERT INTO quizzes (topic) VALUES (:topic)"
-    db.session.execute(sql, {"topic":topic})
+    sql = "INSERT INTO quizzes (topic) VALUES (:topic) RETURNING id"
+    result = db.session.execute(sql, {"topic":topic})
     db.session.commit()
+    return result.fetchone()[0]
 
 def create_question(question, quiz_id):
-    sql = "INSERT INTO questions (content, quiz_id) VALUES (:content, :quiz)"
-    db.session.execute(sql, {"content":question, "quiz":quiz_id})
+    sql = "INSERT INTO questions (content, quiz_id) VALUES (:content, :quiz) RETURNING id"
+    result = db.session.execute(sql, {"content":question, "quiz":quiz_id})
     db.session.commit()
+    return result.fetchone()[0]
 
 def create_answer(answer, question_id, correct):
     sql = "INSERT INTO answers (content, question_id, correct) VALUES (:content, :quiz, :correct)"
