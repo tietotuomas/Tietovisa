@@ -17,7 +17,18 @@
         kello <b>{{ time.strftime("%H:%M:%S") }}</b>.</p>
     <p>Olit kaikkien aikojen <b>{{ ordinal }}</b> sovellukseen rekisteröitynyt käyttäjä.</p>
     <p>Oikeat vastauksesi yhteensä <b>{{ personal[0] }}</b>/{{ personal[1] }}.</p>
-    
+    {% if done|length > 0 %}
+    <p>Tarkastele tekemiäsi visoja: </p>
+    <nav>
+      <ul>
+        {% for quiz in done %}
+        <li><a href="/result/{{ quiz[1] }}">{{ quiz[0]}}</a></li>
+        <br>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endif %}
+    <br>
     
     <h4>Eniten oikeita vastauksia</h4>
     <table>
