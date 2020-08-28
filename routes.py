@@ -43,6 +43,12 @@ def new():
         return render_template("error.html", error_message="Sinulla ei ole oikeutta luoda uutta visaa!", \
             random_message = utilities.get_random_message())
     topic = request.form["topic"]
+    if topic == "":
+        return render_template("error.html",error_message="Et antanut visalle nimeä.", \
+            random_message = utilities.get_random_message())
+    if len(topic) > 100:
+        return render_template("error.html",error_message="Liian pitkä syöte, \
+            nimi saa sisältää korkeintaan 100 merkkiä.", random_message = utilities.get_random_message())
     number_of_questions = int(request.form["questions"])
     number_of_choices = int(request.form["choices"])
     return render_template("new.html", topic=topic, choices = number_of_choices, \
