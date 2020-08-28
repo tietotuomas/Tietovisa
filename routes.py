@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, request, redirect
 import users, quizzes, utilities
+from flask import session
 
 @app.route("/")
 def index():
