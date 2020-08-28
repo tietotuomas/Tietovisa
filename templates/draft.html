@@ -33,6 +33,7 @@
         <option value=5> 5
         </select><br>
         <input type="submit" value="Luo uusi pohja">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
     <br>
     <a href="/">Takaisin etusivulle</a> 

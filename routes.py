@@ -36,6 +36,8 @@ def draft():
 
 @app.route("/new", methods=["POST"])
 def new():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     if not users.is_admin:
         return render_template("error.html", error_message="Sinulla ei ole oikeutta luoda uutta visaa!", \
             random_message = utilities.get_random_message())
@@ -47,6 +49,8 @@ def new():
 
 @app.route("/create", methods=["POST"])
 def create():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     topic = request.form["topic"]
     number_of_choices = request.form["choices"]
     questions = request.form.getlist("question")
@@ -109,6 +113,8 @@ def quiz(id):
 
 @app.route("/answer", methods=["POST"])
 def answer():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     quiz_id = request.form["id"]
     question_ids = request.form.getlist("question")
     answer_ids = []
