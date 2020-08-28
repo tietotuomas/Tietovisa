@@ -4,14 +4,9 @@ import users, quizzes, utilities
 
 @app.route("/")
 def index():
-    all = quizzes.get_all_quizzes()
-    done = quizzes.get_done_quizzes()
-    visible = []
-    for row in all:
-        if row in done:
-            continue
-        visible.append(row)
-    return render_template("index.html", all=len(all), available=len(visible),\
+    all = quizzes.get_number_of_quizzes()
+    visible = quizzes.get_undone_quizzes()
+    return render_template("index.html", all=all, available=len(visible),\
         visible=visible)
 
 @app.route("/login", methods=["get","post"])
@@ -145,7 +140,8 @@ def result(id):
 def stats():
     top5 = quizzes.get_top5_users()
     personal_stats = [quizzes.get_all_correct_answers(), quizzes.get_done_answers()]
+    done_quizzes = quizzes.get_done_quizzes()
     registration_time = users.get_registration_time()
     registration_number = users.get_ordinal()
     return render_template("stats.html", ordinal = registration_number, top5 = top5, personal = personal_stats, \
-        time = registration_time)
+        time = registration_time, done = done_quizzes)

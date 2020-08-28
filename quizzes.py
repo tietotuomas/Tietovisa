@@ -6,6 +6,18 @@ def get_all_quizzes():
     result = db.session.execute(sql)
     return result.fetchall()
 
+def get_undone_quizzes():
+    user = users.user_id()
+    sql = "SELECT quizzes.topic, quizzes.id FROM quizzes WHERE quizzes.id NOT IN \
+        (SELECT quizzes.id FROM quizzes \
+        JOIN questions ON quizzes.id = questions.quiz_id \
+        JOIN answers ON questions.id = answers.question_id \
+        JOIN user_answers ON answers.id = user_answers.answer_id \
+        JOIN users ON user_answers.user_id = users.id \
+        WHERE users.id = :user)"
+    result = db.session.execute(sql, {"user":user})
+    return result.fetchall()
+
 def get_number_of_quizzes():
     sql = "SELECT COUNT(*) FROM quizzes"
     result = db.session.execute(sql)
