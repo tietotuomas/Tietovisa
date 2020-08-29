@@ -88,7 +88,7 @@ def get_correct_answers(id):
         JOIN users ON user_answers.user_id = users.id \
         JOIN questions ON answers.question_id = questions.id \
         JOIN quizzes ON questions.quiz_id = quizzes.id \
-        WHERE quizzes.id = :id AND answers.correct = TRUE AND users.id = :user"
+        WHERE quizzes.id = :id AND answers.correct AND users.id = :user"
     result = db.session.execute(sql, {"id":id, "user":user})
     return result.fetchone()[0]
 
@@ -97,7 +97,7 @@ def get_all_correct_answers():
     sql = "SELECT COUNT(*) FROM answers \
         JOIN user_answers ON answers.id = user_answers.answer_id \
         JOIN users ON user_answers.user_id = users.id \
-        WHERE answers.correct = TRUE AND users.id = :user"
+        WHERE answers.correct AND users.id = :user"
     result = db.session.execute(sql, {"user":user})
     return result.fetchone()[0]
  
@@ -139,7 +139,7 @@ def get_top5_users():
     sql = "SELECT users.username, COUNT(answers.id) AS TOTAL FROM users \
         JOIN user_answers ON users.id = user_answers.user_id \
         JOIN answers ON answers.id = user_answers.answer_id \
-        WHERE answers.correct = TRUE \
+        WHERE answers.correct \
         GROUP BY users.username \
         ORDER BY TOTAL DESC LIMIT 5"
     result = db.session.execute(sql)
