@@ -1,47 +1,31 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-  <link rel='stylesheet' href="/static/style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tietovisa - Kysely</title>
-</head>
-<body>
-  <div class="header">
-  </div>
-  <div class="content">
-    {% if session.user_id %}
-    <h3>{{ topic }}</h3>
+{% extends "layout.html" %}
+{% block title %}Kysely{% endblock %}
+{% block content %}
+  {% if session.user_id %}
+  <h3>{{ topic }}</h3>
+  <br>
+  <i>Vastaathan kaikkiin kysymyksiin, voit tehdä kyselyn vain kerran.</i>
+  <form action="/answer" method="POST">
+    {% for question in questions %}
+    <input type="hidden" name="question" value="{{ question[0] }}">
     <br>
-    <i>Vastaathan kaikkiin kysymyksiin, voit tehdä kyselyn vain kerran.</i>
-
-<form action="/answer" method="POST">
-
-{% for question in questions %}
-<input type="hidden" name="question" value="{{ question[0] }}">
-<br>
-{{ question[1] }}
-<br>
-{% for answer in answers %}
-{% if answer[2] == question[0] %}
-<input type="radio" name="{{question[0]}}" value="{{ answer[0] }}"> {{ answer[1] }} 
-<br>
-
-{% endif %}
-{% endfor %}
-{% endfor %}
-<br>
-<input type="submit" value="Lähetä">
-<input type="hidden" name="id" value="{{ id }}">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-
-</form>
-
-<br>
-<a href="/">Takaisin etusivulle</a>  
-{% else %}
-<a href="/login">Kirjaudu sisään</a>
-{% endif %} 
-</div>
-</body>
-</html>
+    {{ question[1] }}
+    <br>
+    {% for answer in answers %}
+    {% if answer[2] == question[0] %}
+    <input type="radio" name="{{question[0]}}" value="{{ answer[0] }}"> {{ answer[1] }} 
+    <br>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    <br>
+    <input type="submit" value="Lähetä">
+    <input type="hidden" name="id" value="{{ id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </form>
+  <br>
+  <a href="/">Takaisin etusivulle</a>  
+  {% else %}
+  <a href="/login">Kirjaudu sisään</a>
+  {% endif %} 
+{% endblock %}

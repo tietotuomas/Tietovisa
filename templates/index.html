@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-  <link rel='stylesheet' href="static/style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tietovisa - Etusivu</title>
-</head>
-<body>
-  <div class="header">
-  </div>
-  <div class="content">
-  <p> 
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
   {% if session.user_id %}
-  Olet kirjautunut sisään, {{session.username}}.</p>
+  <p>Olet kirjautunut sisään, {{session.username}}.</p>
   {% if session.admin == True %}
   <b>Use the Force</b><br>(Omaat ylläpidon oikeudet)
   {% endif %}
@@ -24,8 +14,7 @@
       <li><a href="/quiz/{{ quiz[1] }}">{{ quiz[0]}}</a></li>
       <br>
       {% endfor %}
-    </ul>
-  
+    </ul>  
   </nav>
   {% elif available == 1 %}
   On vielä yksi visa, johon et ole vastannut:</p>
@@ -36,7 +25,6 @@
       <br>
       {% endfor %}
     </ul>
-  
   </nav>
   {% elif available > 1  %}
   On vielä {{ available }} visaa, joihin et ole vastannut:
@@ -47,7 +35,6 @@
       <br>
       {% endfor %}
     </ul>
-  
   </nav>
   {% else %}
   Olet jo vastannut niihin kaikkiin!
@@ -59,13 +46,9 @@
   <p><a href="/draft">Luo uusi kysely</a></p>
   <p><a href="/administration">Hallinnoi käyttäjiä</a></p>
   {% endif %}
-  
   <p><a href="/stats">Tarkastele tilastoja</a></p>
-  
   <a href="/logout">Kirjaudu ulos</a>
   {% else %}
   <a href="/login">Kirjaudu sisään</a>
   {% endif %}
-</div>
-</body>
-</html>
+{% endblock %}

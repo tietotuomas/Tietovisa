@@ -1,28 +1,15 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-    <link rel='stylesheet' href="static/style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tietovisa - Rekisteröidy</title>
-</head>
-<body>
-  <div class="header">
+{% extends "layout.html" %}
+{% block title %}Rekisteröidy{% endblock %}
+{% block content %}
+  <div class="login">
+    <form action="/register" method="POST">
+      <label for="username">Käyttäjätunnus:</label>
+      <input type="text" name="username">
+      <label for="password">Salasana:</label>
+      <input type="password" name="password">
+      <input id="button1" type="submit" value="Luo tunnus">
+    </form>
   </div>
-  <div class="content">
-    <p>Käyttäjätunnuksen ja salasanan pituus kuuluu olla 3-15 merkkiä.</p>
-    <br>
-    <div class="login">
-        <form action="/register" method="POST">
-            <label for="username">Käyttäjätunnus:</label>
-            <input type="text" name="username">
-            <label for="password">Salasana:</label>
-            <input type="password" name="password">
-            <input id="button1" type="submit" value="Luo tunnus">
-          </form>
-      </div>
-    <br>
-    Takaisin <a href="/">etusivulle</a> 
-</div>
-</body>
-</html>
+  <p>Käyttäjätunnuksen ja salasanan pituus kuuluu olla 3-15 merkkiä.</p>
+  <a href="/">Takaisin etusivulle</a> 
+{% endblock %}

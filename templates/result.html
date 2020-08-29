@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-    <link rel='stylesheet' href="/static/style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tietovisa - Tulokset</title>
-</head>
-<body>
-  <div class="header">
-  </div>
-  <div class="content">
+{% extends "layout.html" %}
+{% block title %}Tulokset{% endblock %}
+{% block content %}
     {% if session.user_id %}
     <h3>{{ topic }}</h3>
     <br>
@@ -17,14 +8,12 @@
     <br>
     {{ message }}
     <br>
-
     {% for question in questions %}
     <br>
     {{ question[1] }}
     <br>
     <div class="control">
     {% for answer in answers %}
-
     {% if answer[2] == question[0] and answer[3] == True and answer[0] in user_answers %}
             <label class="radio">
                 <input type="radio" name="{{question[0]}}" checked>
@@ -49,19 +38,14 @@
                 {{ answer[1] }}
                 <br>
             </label>
-
     {% endif %}
     {% endfor %}
     </div>
     {% endfor %}
-
-
     <br>
     <p><a href="/stats">Tarkastele tilastoja</a></p>
     <a href="/">Takaisin etusivulle</a>
     {% else %}
     <a href="/login">Kirjaudu sisään</a>
     {% endif %} 
-</div>
-</body>
-</html>
+{% endblock %}

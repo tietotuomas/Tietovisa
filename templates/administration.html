@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-  <link rel='stylesheet' href="static/style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tietovisa - Uusi</title>
-</head>
-<body>
-  <div class="header">
-  </div>
-  <div class="content">
+{% extends "layout.html" %}
+{% block title %}Käyttäjähallinta{% endblock %}
+{% block content %}
     {% if session.user_id %}
     <p>Voit poistaa käyttäjän järjestelmästä tai asettaa käyttäjän ylläpitäjäksi.<br>
     Huomioi, että poistettaessa myös käyttäjän tilastot tuhotaan.<br>
     Et voi poistaa käyttäjää, jolla on ylläpitäjän oikeudet.</p>
-    Valitse käyttäjä
+    Sovellukseen rekisteröityneet käyttäjät:
     <br>
     <hr>
     <form action="/administrate" method="POST">
@@ -39,6 +30,4 @@
     {% else %}
     <a href="/login">Kirjaudu sisään</a>
     {% endif %} 
-</div>
-</body>
-</html>
+{% endblock %}

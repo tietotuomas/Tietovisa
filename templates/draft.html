@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-  <link rel='stylesheet' href="static/style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tietovisa - Uusi</title>
-</head>
-<body>
-  <div class="header">
-  </div>
-  <div class="content">
+{% extends "layout.html" %}
+{% block title %}Pohja{% endblock %}
+{% block content %}
     {% if session.user_id %}
     <form action="/new" method="POST">
         Kyselyn aihe (nimi):<br>
@@ -40,6 +31,4 @@
     {% else %}
     <a href="/login">Kirjaudu sisään</a>
     {% endif %} 
-</div>
-</body>
-</html>
+  {% endblock %}

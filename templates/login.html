@@ -1,28 +1,15 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-    <link rel='stylesheet' href="static/style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tietovisa - kirjaudu</title>
-</head>
-<body>
-  <div class="header">
-  </div>
-  <div class="content">
-      <div class="login">
-        <form action="/login" method="POST">
-            <label for="username">Käyttäjätunnus:</label>
-            <input type="text" name="username">
-            <label for="password">Salasana:</label>
-            <input type="password" name="password">
-            <input id="button1" type="submit" value="Kirjaudu">
-          </form>
-      </div>
-
-
-<br>
-Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>.
-</div>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block title %}Kirjaudu{% endblock %}
+{% block content %}
+    <div class="login">
+      <form action="/login" method="POST">
+          <label for="username">Käyttäjätunnus:</label>
+          <input type="text" name="username">
+          <label for="password">Salasana:</label>
+          <input type="password" name="password">
+          <input id="button1" type="submit" value="Kirjaudu">
+        </form>
+    </div>
+    <br>
+    Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>.
+{% endblock %}
