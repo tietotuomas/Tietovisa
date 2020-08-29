@@ -154,3 +154,31 @@ def stats():
     registration_number = users.get_ordinal()
     return render_template("stats.html", ordinal = registration_number, top5 = top5, personal = personal_stats, \
         time = registration_time, done = done_quizzes)
+
+@app.route("/administration")
+def administration():
+    if not users.is_admin:
+        return render_template("error.html", error_message="Sinulla ei ole ylläpitäjän oikeuksia!", \
+            random_message = utilities.get_random_message())
+    non_admin_users = users.get_non_admin_users()
+    return render_template("administration.html", users = non_admin_users)
+
+@app.route("/administrate", methods=["POST"])
+def administrate():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
+    print(request.form)
+    if "user" not in request.form:
+        return render_template("error.html",error_message="Et valinnut käyttäjää.", \
+            random_message = utilities.get_random_message())
+    user = request.form["user"]
+    action = request.form["action"]
+    if action == "delete":
+        users.delete_user(user)
+    elif action == "admin":
+        users.set_admin(user)
+    else:
+        return render_template("error.html",error_message="Et valinnut toimintoa.", \
+            random_message = utilities.get_random_message())
+    return redirect("/")
+ 

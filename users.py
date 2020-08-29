@@ -55,3 +55,18 @@ def get_ordinal():
 
 def is_admin():
     return session.get("admin")
+
+def get_non_admin_users():
+    sql = "SELECT id, username, admin FROM users"
+    result = db.session.execute(sql)
+    return result.fetchall()
+
+def delete_user(id):
+    sql = "DELETE from users WHERE id = :id"
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
+
+def set_admin(id):
+    sql = "UPDATE users SET admin=TRUE WHERE id = :id"
+    db.session.execute(sql, {"id":id})
+    db.session.commit()

@@ -144,3 +144,4 @@ def get_top5_users():
         ORDER BY TOTAL DESC LIMIT 5"
     result = db.session.execute(sql)
     return result.fetchall()
+
