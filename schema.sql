@@ -21,6 +21,6 @@ CREATE TABLE users (
     created_at TIMESTAMP
 );
 CREATE TABLE user_answers ( 
-    user_id INTEGER REFERENCES users,
+    user_id INTEGER REFERENCES users ON DELETE CASCADE,
     answer_id INTEGER REFERENCES answers
 );
