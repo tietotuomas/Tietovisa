@@ -16,15 +16,13 @@ def get_feedback(points):
 def get_ordinal(id):
     ordinal = ""
     ordinals = ["ensimmäinen", "toinen", "kolmas", "neljäs", "viides", "kuudes",\
-                            "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"]
-         
+                            "seitsemäs", "kahdeksas", "yhdeksäs", "kymmenes"]     
     if id <= 10:
         for i in range (1, 11):
             if i == id:
                 ordinal = ordinals[i-1]
     else:
         ordinal = str(id) + "."
-    
     return ordinal
 
 def get_random_message():
