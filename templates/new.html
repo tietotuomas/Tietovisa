@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}Uusi{% endblock %}
 {% block content %}
+{% if session.user_id %}
     <h3>{{ topic }}</h3>
     <i>Muista täyttää kaikki kohdat.</i>
     <br>
@@ -27,4 +28,7 @@
     </form>
     <br>
     <a href="/">Takaisin etusivulle</a> 
+{% else %}
+    <a href="/login">Kirjaudu sisään</a>
+{% endif %} 
 {% endblock %}

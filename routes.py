@@ -63,7 +63,6 @@ def create():
     questions = request.form.getlist("question")
     choices = request.form.getlist("choice")
     correct = request.form.getlist("correct")
-
     for question in questions:
         if question == "":
             return render_template("error.html",error_message="Et täyttänyt kaikkia kenttiä!", \
