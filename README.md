@@ -4,8 +4,9 @@ Tietokantasovellus
 http://tietovisa2020.herokuapp.com/
 
 Tämä tietokantasovellus soveltuu sekä hyöty- että hupikäyttöön. Ylläpitäjä voi luoda kyselyjä esim. opiskelukäyttöön 
-tai tietovisa-hengessä ajanvietteeksi. Käyttäjät voivat vastata haluamiinsa kyselyihin (kerran per kysely) ja tarkastella 
-tilastoja. Kysymyksien vastausvaihtoehdot toteutetaan automaattisesti tarkistettavina monivalintoina.
+tai tietovisa-hengessä ajanvietteeksi. Ylläpitäjä voi lisäksi tarkistaa sovellukseen rekisteröityneet käyttäjät, poistaa käyttäjän
+tiedot sovelluksesta tai asettaa käyttäjän ylläpitäjäksi. Käyttäjät voivat vastata haluamiinsa kyselyihin (kerran per kysely) ja 
+tarkastella tilastoja. Kysymyksien vastausvaihtoehdot toteutetaan automaattisesti tarkistettavina monivalintoina.
 
 Perustoiminnot:
 
@@ -13,6 +14,8 @@ Perustoiminnot:
 - kirjautuminen käyttäjätunnuksella ja salasanalla
 - kaksi eri luokkaa: peruskäyttäjä ja admin
 - adminilla mahdollisuus luoda uusia kyselyjä
+- adminilla mahdollisuus tarkastella rekisteröityneitä käyttäjiä (käyttäjätunnukset)
+- adminilla mahdollisuus poistaa käyttäjän tiedot tietokannasta tai asettaa käyttäjä ylläpitäjäksi
 - käyttäjillä mahdollisuus valita haluamansa kysely
 - kyselyn täyttämisen jälkeen automaattinen palaute
 - tilastointi
@@ -30,20 +33,30 @@ sivuja, vain admin pääsee kyselyjen luontiin, käyttäjä ei pääse katselema
 - käyttäjä saa samalla "pisteidensä" perusteella sanallisen palautteen sattumanvaraisesti muutamasta vaihtoehdosta
 - tilastoissa rekisteröintitiedot (milloin ja monesko käyttäjä)
 - tilastoissa omien oikeiden vastauksien kokonaismäärä ja (enintään) TOP-5 eniten oikeita vastauksia omaavat käyttäjät
-<br></br>
-- <i>tilastoissa omat kysely-kohtaiset pisteet</i>
-- <i>tilastoissa TOP-5 prosentuaalisesti eniten oikeita vastauksia omaavat käyttäjät</i>
-- <i>adminille mahdollisuus poistaa tietyn käyttäjän tiedot tietokannasta</i>
+- tilastoissa linkit käyttäjän jo tekemiin kyselyihin
 
 
 
-<b>Välipalautus 23.8:</b>
 
-Sovellus on näkemykseni mukaan hyvin aikataulussa. Olen pyrkinyt lisäämään toimintoja ja korjaamaan puutteita saadun palautteen perusteella,
-tietysti myös omaan suunnitelmaan pohjautuen. Suunnitelmakin on ketterän kehityksen nimissä matkan aikana hieman mukautunut, mutta 
-alkuperäinen visio on toteunut silti melko hyvin. Yläpuolella on listattuna sovelluksesta löytyviä toiminnallisuuksia ja ominaisuuksia.
-Kursivoidut kohdat ovat puuttuvia ominaisuuksia, joita yritän viimeisen viikon aikana toteuttaa. Jos aikaa niiden ja mahdollisten parannus-
-ehdotusten jäljiltä jää, myös sovelluksen ulkoasua olisi tarkoitus hieman hioa.
+Kommentti: (Lopullinen palautus 30.8.2020)
+
+Sovellus sisältää ne ominaisuudet, joita alkuperäisessä suunnitelmassa hahmottelin. Matkan varrella uusia ideoita syntyi lisää ja 
+niistäkin sain osan toteutettua. Toteuttamatta jääneisiin ideoihin kuuluu mm. toiminto, joka olisi näyttänyt tilastoissa myös 
+TOP-5 prosentuaalisesti eniten oikeita vastauksia omaavat käyttäjät ja toiminto, jolla olisi voinut poistaa tietyn visan sovelluksesta. 
+Lisäksi muutama (mielestäni ei-niin-tärkeä) edge case jäi korjaamatta, joita ovat mm:\
+Tilanne, jossa kirjautumaton käyttäjä navigoi osoitepalkin kautta new-sivulle, johtaa Not Found-ilmoitukseen.\
+Tilanne, jossa Herokun Postgres-tietokannan pääavain hyppää eteenpäin itsestään, johtaa virheelliseen tietoon tilasto-sivulla siitä, 
+monesko rekisteröitynyt käyttäjä oli. (Tällaisen tilanteen olen huomannut toistaiseksi vain kerran.)\
+Myös ulkoasuun jäi hiomattomia kohtia.
+
+Yleisesti sovelluksen ulkoasusta olsi todennäköisesti tullut elegantimpi esim. Bootstrap-kirjastolla ja toisaalta käyttäjäkokemuksesta 
+varmasti "responsiivisempi" JavaScriptiä hieman sekaan laittamalla, mutta päätin toteuttaa sovelluksen selväpiirteisellä HTML/CSS-linjalla 
+(ilman pop-uppeja tms). Todettakoon myös, että tämä oli minulle ensimmäinen web-sovellus ja HTML/CSS:n osalta lähdin liikkelle melko lailla
+nollista, mitä nyt Lapio-kurssilla olin hieman pintaa raapaissut. Tältä pohjalta tuntui tarkoituksenmukaisemmalta tutustua HTML- ja CSS-kielten
+perusteisiin ilman, että olisin lähtenyt lisäksi rakentamaan ulkoasua tai ominaisuuksia Bootstrapin ja/tai JavaScriptin avulla.
+
+"Konepellin alla" olen tyytyväinen sovelluksen tiedostorakenteeseen, tietokantaan, Python-koodiin ja SQL-kyselyihin. 
+Html-koodiin jäi parantamisen varaa.
 
 Sovellusta voi testata osoitteessa https://tietovisa2020.herokuapp.com/ luomalla uuden käyttäjätunnuksen ja/tai käyttämällä admin-tason käyttäjätunnusta:
 <br/><br/>
