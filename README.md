@@ -1,5 +1,5 @@
 # Tietovisa
-Tietokantasovellus
+<h3>Tietokantasovellus</h3>
 
 http://tietovisa2020.herokuapp.com/
 
@@ -35,10 +35,8 @@ sivuja, vain admin pääsee kyselyjen luontiin, käyttäjä ei pääse katselema
 - tilastoissa omien oikeiden vastauksien kokonaismäärä ja (enintään) TOP-5 eniten oikeita vastauksia omaavat käyttäjät
 - tilastoissa linkit käyttäjän jo tekemiin kyselyihin
 
-
-
-
-Kommentti: (Lopullinen palautus 30.8.2020)
+<br></br>
+<h4>Kommentti: (Lopullinen palautus 30.8.2020)</h4>
 
 Sovellus sisältää ne ominaisuudet, joita alkuperäisessä suunnitelmassa hahmottelin. Matkan varrella uusia ideoita syntyi lisää ja 
 niistäkin sain osan toteutettua. Toteuttamatta jääneisiin ideoihin kuuluu mm. toiminto, joka olisi näyttänyt tilastoissa myös 
@@ -56,7 +54,7 @@ nollista, mitä nyt Lapio-kurssilla olin hieman pintaa raapaissut. Tältä pohja
 perusteisiin ilman, että olisin lähtenyt lisäksi rakentamaan ulkoasua tai ominaisuuksia Bootstrapin ja/tai JavaScriptin avulla.
 
 "Konepellin alla" olen tyytyväinen sovelluksen tiedostorakenteeseen, tietokantaan, Python-koodiin ja SQL-kyselyihin. 
-Html-koodiin jäi parantamisen varaa.
+Html-koodiin jäi parantamisen varaa
 
 Sovellusta voi testata osoitteessa https://tietovisa2020.herokuapp.com/ luomalla uuden käyttäjätunnuksen ja/tai käyttämällä admin-tason käyttäjätunnusta:
 <br/><br/>
