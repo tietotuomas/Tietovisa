@@ -30,7 +30,7 @@ def logout():
 
 @app.route("/draft")
 def draft():
-    if not users.is_admin:
+    if not users.is_admin():
         return render_template("error.html", error_message="Sinulla ei ole oikeutta luoda uutta visaa!", \
             random_message = utilities.get_random_message())
     return render_template("draft.html")
@@ -39,7 +39,7 @@ def draft():
 def new():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
-    if not users.is_admin:
+    if not users.is_admin():
         return render_template("error.html", error_message="Sinulla ei ole oikeutta luoda uutta visaa!", \
             random_message = utilities.get_random_message())
     topic = request.form["topic"]
@@ -78,7 +78,6 @@ def create():
         if len(choice) > 100:
             return render_template("error.html",error_message="Liian pitkä syöte vaihtoehdossa, \
                 vaihtoehto saa sisältää korkeintaan 100 merkkiä.", random_message = utilities.get_random_message())    
-    
     quiz_id = quizzes.create_quiz(topic)
     answer_index=0
     for question in questions:
@@ -133,7 +132,7 @@ def answer():
 @app.route("/result/<int:id>")
 def result(id):
     if not quizzes.is_done(id):
-        return render_template("error.html",error_message="Et ole vielä vastannut tähän kyselyyn!", \
+        return render_template("error.html",error_message="Et voi tarkastella tämän kyselyn tuloksia.", \
             random_message = utilities.get_random_message())
     topic = quizzes.get_quiz_topic(id)
     questions = quizzes.get_question_content_and_ids(id)
@@ -157,7 +156,7 @@ def stats():
 
 @app.route("/administration")
 def administration():
-    if not users.is_admin:
+    if not users.is_admin():
         return render_template("error.html", error_message="Sinulla ei ole ylläpitäjän oikeuksia!", \
             random_message = utilities.get_random_message())
     non_admin_users = users.get_non_admin_users()
@@ -167,7 +166,6 @@ def administration():
 def administrate():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
-    print(request.form)
     if "user" not in request.form:
         return render_template("error.html",error_message="Et valinnut käyttäjää.", \
             random_message = utilities.get_random_message())
