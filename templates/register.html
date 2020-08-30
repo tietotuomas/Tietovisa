@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block title %}Rekisteröidy{% endblock %}
 {% block content %}
+{% if session.user_id %}
+<p>Olet jo kirjatunut sisään.</p>
+<a href="/">Takaisin etusivulle</a>
+{% else %}
   <div class="login">
     <form action="/register" method="POST">
       <label for="username">Käyttäjätunnus:</label>
@@ -12,4 +16,5 @@
   </div>
   <p>Käyttäjätunnuksen ja salasanan pituus kuuluu olla 3-15 merkkiä.</p>
   <a href="/">Takaisin etusivulle</a> 
+{% endif %}
 {% endblock %}
