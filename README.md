@@ -49,7 +49,7 @@ Tilanne, jossa Herokun Postgres-tietokannan pääavain hyppää eteenpäin itses
 monesko rekisteröitynyt käyttäjä oli. (Tällaisen tilanteen olen huomannut toistaiseksi vain kerran.)\
 Myös ulkoasuun jäi hiomattomia kohtia.
 
-Yleisesti sovelluksen ulkoasusta olsi todennäköisesti tullut elegantimpi esim. Bootstrap-kirjastolla ja toisaalta käyttäjäkokemuksesta 
+Yleisesti sovelluksen ulkoasusta olisi todennäköisesti tullut elegantimpi esim. Bootstrap-kirjastolla, ja toisaalta käyttäjäkokemuksesta 
 varmasti "responsiivisempi" JavaScriptiä hieman sekaan laittamalla, mutta päätin toteuttaa sovelluksen selväpiirteisellä HTML/CSS-linjalla 
 (ilman pop-uppeja tms). Todettakoon myös, että tämä oli minulle ensimmäinen web-sovellus ja HTML/CSS:n osalta lähdin liikkelle melko lailla
 nollista, mitä nyt Lapio-kurssilla olin hieman pintaa raapaissut. Tältä pohjalta tuntui tarkoituksenmukaisemmalta tutustua HTML- ja CSS-kielten
