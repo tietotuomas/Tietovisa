@@ -117,6 +117,9 @@ def answer():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
     quiz_id = request.form["id"]
+    if quizzes.is_done(quiz_id):
+        return render_template("error.html",error_message="Olet jo vastannut tähän kyselyyn!", \
+            random_message = utilities.get_random_message())
     question_ids = request.form.getlist("question")
     answer_ids = []
     for question in question_ids:

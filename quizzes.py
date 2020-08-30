@@ -29,7 +29,7 @@ def is_done(quiz):
         JOIN questions ON quizzes.id = questions.quiz_id \
         JOIN answers ON questions.id = answers.question_id \
         JOIN user_answers ON answers.id = user_answers.answer_id \
-        JOIN users ON user_answers.user_id = users.id\
+        JOIN users ON user_answers.user_id = users.id \
         WHERE users.id = :user AND quizzes.id = :quiz"
     result = db.session.execute(sql, {"user":user, "quiz":quiz})
     if result.fetchone() != None:
