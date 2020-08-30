@@ -54,7 +54,7 @@ nollista, mitä nyt Lapio-kurssilla olin hieman pintaa raapaissut. Tältä pohja
 perusteisiin ilman, että olisin lähtenyt lisäksi rakentamaan ulkoasua tai ominaisuuksia Bootstrapin ja/tai JavaScriptin avulla.
 
 "Konepellin alla" olen tyytyväinen sovelluksen tiedostorakenteeseen, tietokantaan, Python-koodiin ja SQL-kyselyihin. 
-Html-koodiin jäi parantamisen varaa
+Html-koodiin jäi parantamisen varaa.
 
 Sovellusta voi testata osoitteessa https://tietovisa2020.herokuapp.com/ luomalla uuden käyttäjätunnuksen ja/tai käyttämällä admin-tason käyttäjätunnusta:
 <br/><br/>
