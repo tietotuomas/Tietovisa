@@ -41,10 +41,10 @@ sivuja, vain admin pääsee kyselyjen luontiin, käyttäjä ei pääse katselema
 Sovellus sisältää ne ominaisuudet, joita alkuperäisessä suunnitelmassa hahmottelin. Matkan varrella uusia ideoita syntyi lisää ja 
 niistäkin sain osan toteutettua. Toteuttamatta jääneisiin ideoihin kuuluu mm. toiminto, joka olisi näyttänyt tilastoissa myös 
 TOP-5 prosentuaalisesti eniten oikeita vastauksia omaavat käyttäjät ja toiminto, jolla olisi voinut poistaa tietyn visan sovelluksesta. 
-Lisäksi muutama (mielestäni ei-niin-tärkeä) edge case jäi korjaamatta, joita ovat mm:\
-Tilanne, jossa kirjautumaton käyttäjä navigoi osoitepalkin kautta new-sivulle, johtaa Not Found-ilmoitukseen.\
+Lisäksi muutama (mielestäni ei-niin-tärkeä) edge case jäi korjaamatta, joita ovat mm:  
+Tilanne, jossa kirjautumaton käyttäjä navigoi osoitepalkin kautta new-sivulle, johtaa Not Found-ilmoitukseen.  
 Tilanne, jossa Herokun Postgres-tietokannan pääavain hyppää eteenpäin itsestään, johtaa virheelliseen tietoon tilasto-sivulla siitä, 
-monesko rekisteröitynyt käyttäjä oli. (Tällaisen tilanteen olen huomannut toistaiseksi vain kerran.)\
+monesko rekisteröitynyt käyttäjä oli. (Tällaisen tilanteen olen huomannut toistaiseksi vain kerran.)  
 Myös ulkoasuun jäi hiomattomia kohtia.
 
 Yleisesti sovelluksen ulkoasusta olisi todennäköisesti tullut elegantimpi esim. Bootstrap-kirjastolla, ja toisaalta käyttäjäkokemuksesta 
