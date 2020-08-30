@@ -37,9 +37,10 @@ body {
     border: none;
     text-align: center;
     width: 15.5em;
-    background: grey;
+    background: rgb(7, 7, 7);
     border-radius: 0.5em;
     margin-top: 0.5em;
+    color:white;
 
 }
 
@@ -56,7 +57,7 @@ body {
 } */
 
 #button1:hover {
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(104, 104, 104)
 }
 
 /* .button2:hover {
